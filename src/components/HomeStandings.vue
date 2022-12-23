@@ -1,31 +1,65 @@
+<script setup lang="ts">
+    import type { RunResult } from '@/scripts/interfaces';
+    import { reactive } from 'vue'
+    import StandingsItem from './StandingsItem.vue';
+
+    const times: RunResult[] = [
+    {
+        name: "Bill Sand",
+        raw_time: 45.345,
+        class: {
+            name: "XB",
+            pax: 0.852
+        }
+    }, {
+        name: "Matt Johnson",
+        raw_time: 45.545,
+        class: {
+            name: "XA",
+            pax: 0.845
+        }
+    }, {
+        name: "James Glaser",
+        raw_time: 45.600,
+        class: {
+            name: "XB",
+            pax: 0.852
+        }
+    }];
+
+    const items = reactive([
+    {
+        name: "Bill Sand",
+        position: 1,
+        raw_time: 45.345,
+        diff: 0.000,
+        class: "XB"
+    }, {
+        name: "Matt Johnson",
+        position: 2,
+        raw_time: 45.545,
+        diff: 0.200,
+        class: "XA"
+    }, {
+        name: "James Glaser",
+        position: 3,
+        raw_time: 45.600,
+        diff: 0.055,
+        class: "XB"
+    }
+    ])
+</script>
 
 <template>
-  <div class="standings-list">
-    <div class="item">
-        <div class="position">1</div>
-        <div class="name">Bill Sand</div>
-        <div class="time">45.345</div>
-        <div class="diff">0.000</div>
-    </div>
+  <div class="standings-list" >
+    <StandingsItem 
+        v-for="item in items" 
+        :key="item.name" 
+        :item="item"
+    />
   </div>
 </template>
 
 <style scoped>
-    .item {
-        height: 70px;
-        border-bottom: 1px solid white;
-        display: flex;
-    }
 
-    .position {
-        height: 30px;
-        width: 30px;
-        border: 1px solid white;
-        border-radius: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 22px;
-        margin: 0 20px;
-    }
 </style>
